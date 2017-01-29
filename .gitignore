@@ -1,5 +1,6 @@
 grpctest
 coffee_client
 coffee_server
+rest_server
 *.sw?
 
