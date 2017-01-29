@@ -3,9 +3,11 @@ package main
 import (
 	"github.com/plantimals/grpctest/coffee"
 	"golang.org/x/net/context"
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
+	"time"
 )
 
 const (
@@ -14,10 +16,10 @@ const (
 
 type server struct{}
 
-func (s *server) CoffeeService(ctx context.Context, cr *coffee.CoffeeRequest) (*coffee.CoffeeReply, error) {
+func (s *server) Coffee(ctx context.Context, cr *coffee.CoffeeRequest) (*coffee.CoffeeReply, error) {
 	return &coffee.CoffeeReply{
 		Coffee: &coffee.Coffee{
-			ID:        cr.Id,
+			ID:        uint32(cr.Id),
 			Name:      "my coffee",
 			CurrState: "heating",
 			Beans: &coffee.Beans{
@@ -25,12 +27,12 @@ func (s *server) CoffeeService(ctx context.Context, cr *coffee.CoffeeRequest) (*
 				Name: "death wish",
 				Desc: "deadly",
 			},
-			History: []coffee.Transition{
+			History: []*coffee.Transition{
 				&coffee.Transition{
 					ID:   1,
 					From: "start",
 					To:   "heating",
-					Time: 1485656777,
+					Time: time.Now().Unix(),
 					User: &coffee.User{
 						ID:   1,
 						Name: "rob",

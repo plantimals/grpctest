@@ -1,0 +1,140 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "coffee/coffee.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1beta/coffees/{id}": {
+      "get": {
+        "operationId": "coffee",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/coffeeCoffeeReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "CoffeeService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "coffeeBeans": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "desc": {
+          "type": "string"
+        }
+      }
+    },
+    "coffeeCoffee": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Name": {
+          "type": "string"
+        },
+        "CurrState": {
+          "type": "string"
+        },
+        "Beans": {
+          "$ref": "#/definitions/coffeeBeans"
+        },
+        "History": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/coffeeTransition"
+          }
+        },
+        "CreatedAt": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "coffeeCoffeeReply": {
+      "type": "object",
+      "properties": {
+        "Coffee": {
+          "$ref": "#/definitions/coffeeCoffee"
+        }
+      }
+    },
+    "coffeeCoffeeRequest": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "coffeeTransition": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "From": {
+          "type": "string"
+        },
+        "To": {
+          "type": "string"
+        },
+        "Time": {
+          "type": "string",
+          "format": "int64"
+        },
+        "User": {
+          "$ref": "#/definitions/coffeeUser"
+        }
+      }
+    },
+    "coffeeUser": {
+      "type": "object",
+      "properties": {
+        "ID": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "Name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

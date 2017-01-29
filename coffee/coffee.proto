@@ -3,9 +3,14 @@ syntax = "proto3";
 
 package coffee;
 
+import "google/api/annotations.proto";
+
 service CoffeeService {
   rpc coffee (CoffeeRequest) returns (CoffeeReply) {
-  }
+    option(google.api.http) = {
+      get: "/v1beta/coffees/{id}"
+    };
+  };
 }
 
 message CoffeeRequest {

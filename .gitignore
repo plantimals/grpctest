@@ -1,3 +1,5 @@
 grpctest
+coffee_client
+coffee_server
 *.sw?
 
